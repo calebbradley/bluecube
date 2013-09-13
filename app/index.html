@@ -16,6 +16,8 @@
  
         <script src="http://www.parsecdn.com/js/parse-1.2.10.min.js"></script>
  
+
+
     </head>
     <body>
         <!--[if lt IE 10]>
@@ -37,9 +39,11 @@
                 <div class="col-md-4 sidebar">
                     <button type="button" class="btn btn-default btn-block new">New To-Do <span class="glyphicon glyphicon-pencil"></span></button>
  
-                    <ul class="notes"></ul>
+                    <ol class="notes"></ol>
+
                 </div>
- 
+
+
                 <div class="col-md-5 main">
                     <!-- Post form -->
                     <form class="form-horizontal form" role="form">
@@ -47,7 +51,7 @@
                       <div class="form-group">
                         <label for="title" class="col-lg-2 control-label">To-Do</label>
                         <div class="col-lg-10">
-                          <input type="email" class="form-control" id="title" placeholder="Post To-Do here...">
+                          <input type="text" class="form-control" id="title" placeholder="Post To-Do here...">
                         </div>
                       </div>
  
@@ -55,7 +59,7 @@
                       <div class="form-group">
                         <label for="content" class="col-lg-2 control-label">Description</label>
                         <div class="col-lg-10">
-                          <textarea id="content" class="form-control" placeholder="Detailed description of To-Do goes here..."></textarea>
+                          <textarea id="content" class="form-control" id="content" placeholder="Detailed description of To-Do goes here..."></textarea>
                         </div>
                       </div>
                     </form>
@@ -63,14 +67,43 @@
                 </div>
  
                 <div class="col-md-3 actions">
-                    <button type="submit" class="btn btn-default btn-block save">Save</button>
+                    <button type="submit" class="btn btn-success edit btn-block save">Save</button>
+                    <button type="button" class="btn btn-danger btn-block delete">Delete</button>
                 </div>
             </div>
  
+
+
+
+
+
+
  
-            <div class="footer">
-                <p>♥ from the Yeoman team</p>
-            </div>
+            <div class="notification undo-button">Item Deleted. Undo?</div>
+<div class="notification save-notification">Item Saved</div>
+<div class="reminder-container">
+  <header>
+    <h1>mini reminders list</h1>
+  </header>
+  <form id="input-form">
+    <input type="text" id="text" placeholder="Remind me to.."/>
+    <input type="submit" value="Add" />
+  </form>
+  <ul class="reminders">
+ 
+  </ul>
+  <footer>
+    <span class="count"></span>
+    <button class="clear-all">Delete All</button>
+  </footer>
+</div>
+
+
+
+
+
+
+
  
         </div>
  
