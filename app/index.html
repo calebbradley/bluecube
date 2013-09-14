@@ -24,88 +24,37 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
  
- 
+        
         <div class="container">
             <div class="header">
-                <ul class="nav nav-pills pull-right">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-                <h3 class="text-muted">bluecube</h3>
+                
+                <h3 class="text-muted">SmartTask</h3>
             </div>
- 
-            <div class="row">
-                <div class="col-md-4 sidebar">
-                    <button type="button" class="btn btn-default btn-block new">New To-Do <span class="glyphicon glyphicon-pencil"></span></button>
- 
-                    <ol class="notes"></ol>
-
-                </div>
+        </div> 
+        
 
 
-                <div class="col-md-5 main">
-                    <!-- Post form -->
-                    <form class="form-horizontal form" role="form">
-                      <!-- title -->
-                      <div class="form-group">
-                        <label for="title" class="col-lg-2 control-label">To-Do</label>
-                        <div class="col-lg-10">
-                          <input type="text" class="form-control" id="title" placeholder="Post To-Do here...">
-                        </div>
-                      </div>
- 
-                      <!-- content  -->
-                      <div class="form-group">
-                        <label for="content" class="col-lg-2 control-label">Description</label>
-                        <div class="col-lg-10">
-                          <textarea id="content" class="form-control" id="content" placeholder="Detailed description of To-Do goes here..."></textarea>
-                        </div>
-                      </div>
-                    </form>
- 
-                </div>
- 
-                <div class="col-md-3 actions">
-                    <button type="submit" class="btn btn-success edit btn-block save">Save</button>
-                    <button type="button" class="btn btn-danger btn-block delete">Delete</button>
-                </div>
+        <div class="jumbotron">
+            <div class="reminder-container">
+              <header>
+                <h1>mini reminders list</h1>
+              </header>
+              <form id="input-form">
+                <input type="text" id="text" placeholder="I Need To.."/>
+                <input type="submit" value="Add" />
+              </form>
+              <ul class="reminders">
+             
+              </ul>
+              
+              <footer>
+                <span class="count"></span>
+                <button class="clear-all">Delete All</button>
+              </footer>
             </div>
- 
-
-
-
-
-
-
- 
-            <div class="notification undo-button">Item Deleted. Undo?</div>
-<div class="notification save-notification">Item Saved</div>
-<div class="reminder-container">
-  <header>
-    <h1>mini reminders list</h1>
-  </header>
-  <form id="input-form">
-    <input type="text" id="text" placeholder="Remind me to.."/>
-    <input type="submit" value="Add" />
-  </form>
-  <ul class="reminders">
- 
-  </ul>
-  <footer>
-    <span class="count"></span>
-    <button class="clear-all">Delete All</button>
-  </footer>
-</div>
-
-
-
-
-
-
-
- 
         </div>
+
+        <!-- end container div -->
  
  
         <!-- build:js scripts/vendor.js -->
@@ -123,6 +72,7 @@
             r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
             ga('create','UA-XXXXX-X');ga('send','pageview');
         </script>
+
  
         <!-- build:js scripts/main.js -->
         <script src="scripts/main.js"></script>
@@ -146,5 +96,5 @@
         <script src="bower_components/sass-bootstrap/js/collapse.js"></script>
         <script src="bower_components/sass-bootstrap/js/tab.js"></script>
         <!-- endbuild -->
-</body>
+    </body>
 </html>
