@@ -30,7 +30,7 @@ html {
 body {
   font-family: "Lato", sans-serif;
   height: 2000px;
-  color: purple;
+  color: orange;
   font-weight: bolder;
   font-size: 21px;
 }
@@ -260,19 +260,19 @@ li [class*=" icon-"] {
 }
 
 ::-webkit-input-placeholder {
-  color: purple;
+  color: orange;
 }
 
 :-moz-placeholder {
-  color: purple;
+  color: orange;
 }
 
 ::-moz-placeholder {
-  color: purple;
+  color: orange;
 }
 
 :-ms-input-placeholder {
-  color: purple;
+  color: orange;
 }
 
 
@@ -282,7 +282,9 @@ html, body{
 }
 
 body {
-  background: #1BFEFE;
+ background-image: url("png.png");
+ background-repeat: repeat-y, 100%;
+ background-repeat: repeat-x, 100%;
 }
 
 
@@ -299,6 +301,7 @@ body {
   display:inline-block;
   margin: 0 5px;
 }
+
 .demo-nav li a, .tutorial-link{
   display:block;
   width:100%;
@@ -347,13 +350,13 @@ input[type='text'] {
   background-color: transparent;
   font-size: 20px;
   font-weight:300;
-  color: purple;
+  color: orange;
   float:left;
   padding:5px 10px;
   -webkit-transition: all .3s ease;
   -o-transition: all .3s ease;
   transition: all .3s ease;
-  background-color: rgba(0,0,0,.15);
+  background-color: rgba(0,0,0,.50);
 }
 
 input[type='submit']{
@@ -361,10 +364,10 @@ input[type='submit']{
   width:70px;
   padding:10px;
   text-align:center;
-  background-color: rgba(0,0,0,.25);
+  background-color: rgba(0,0,0,.50);
   border:0;
   border-left:0;
-  color: purple;
+  color: orange;
   cursor:pointer;
   padding:0;
   vertical-align:bottom;
@@ -379,7 +382,7 @@ button::-moz-focus-inner {
 
 input[type='text']:focus {
   outline: none;
-  color: purple;
+  color: orange;
 }
 
 .notification {
@@ -416,16 +419,16 @@ button,
 }
 
 .clear-all{
-  background-color: rgba(0,0,0,.25);
+  background-color: rgba(0,0,0,.50);
   font:300 18px "Lato", "Arial", sans-serif;
-  color: purple;
+  color: orange;
   font-weight: bolder;
 }
 
 button.disabled,
 .clear-all.disabled {
   background-color: rgba(0,0,0,.25);
-  color: purple;
+  color: orange;
 }
 
 button.disabled .icon-trash,
@@ -480,7 +483,7 @@ button .icon-trash {
 }
 
 li[contenteditable='true']{
-  color:black;
+  color:purple;
 }
 
 .icon-trash,
