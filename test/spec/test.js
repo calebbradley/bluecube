@@ -1,45 +1,40 @@
 /*global describe, it */
+
+
+var should = chai.should();
+ 
+describe("mini reminders list", function() {
+  it("creates a global variable for the name space", function () {
+    should.exist(todoApp);
+  })
+})
+  
+if (typeof todoApp === "undefined") todoApp = {};
+
+
 'use strict';
 (function () {
-    describe('To Do Form', function () {
-    	this.timeout(3000);
-
-        describe('The save button', function () {
-            it('should save new ToDos and those
-        	ToDos should be returned from Parse', function (done) {
-        		var result;
-
-        		// fill out the form
-			    var form = $('.form')
-			    // make a random title with which we can query
-			    var randomTitle = 'A Test Post #'+ Math.floor(Math.random()*10000000)
-		        form.find('#title').val(randomTitle)
-	    	    form.find('#content').val('This is a really great post! I loved writing it!')
- 
-			    // submit it
-			    $('.save').click()
-
-
-			    setTimeout((function(3000){
- 
-        		var query = new Parse.Query(NoteClass);
-                query.equalTo("title", randomTitle);
-        		query.find({
-         	    success: function(results) {
-            	result = results[0]
-            	console.log(results)
-            	expect(result.get('title')).to.equal(randomTitle)
-            	done()
-          },
-          error: function(error) {
-            done(error.description)
-          }
+    describe('mini reminders list', function () {
+        
+        it("should confirm that the 'Save' button can send the form values to the Parse Object", function () {
+        	      	
         });
- 
-      }), 3000)
-    }); // end it()
- 
-  })
+    });
 })();
+
+
+describe("mini reminders list", function(){
+  describe("Initialization", function() {
+    beforeEach(function() {     
+    })   
+  })
+})
+
+if (typeof reminders === "newTodo") reminders = {};
+
+
+/* NEED HELP GROKING UNIT TESTING */
+
+
 
 
