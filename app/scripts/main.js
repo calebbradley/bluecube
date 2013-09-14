@@ -1,142 +1,215 @@
 Parse.initialize("MREHdC9OjtXDq5Y9hllrZ16vk3ccFF6ZLBTRxrSK", "r0ycB4sOzGJbZO3cmQPldt0G0KusZ8RmAI9pRLJe");
 
+(function(){
 
-
-var NoteClass = Parse.Object.extend("Note");
- 
-var NoteCollectionClass = Parse.Collection.extend({
-  model: NoteClass
-});
- 
-// create an instance of the collection
-var notes = new NoteCollectionClass()
- 
-notes.fetch({
-  success: function(collection) {
-    collection.each(function(note){
-      addToSideBar(note)
-    })
-  }
-})
- 
-$('.save').click(function(){
-  var note = new NoteClass();
-  note.set('title', $('#title').val());
-  note.set('content', $('#content').val());
- 
-  note.save(null, {
-    success: function(result){
-      addToSideBar(result)
-    },
-    error: function(result, error){
-      alert("TRY AGAIN, "+ error.description)
+  var lastdeletedID, lastdeletedTEXT, lastdeletedINDEX, count = 0;
+  
+  function updateCounter(){
+    $('.count').text(count);
+    var deleteButton = $('.clear-all');
+    if(count === 0){
+      deleteButton.attr('disabled', 'disabled').addClass('disabled');
     }
-  })
-})
- 
-// functions 
- 
-function addToSideBar(note) {
-  var li = $('<li>'+note.get('title')+'</li>')
-  $('.notes').append(li)
-  li.click(function(){
-    renderNote(note)
-  })
-}
- 
-function renderNote(note) {
-  $('#title').val( note.get('title') )
-  $('#content').val( note.get('content') )
-}
-
-
-
-var Todo = Backbone.Model.extend({
-  // Default todo attribute values
-  defaults: {
-    title: '',
-    completed: false
-  }
-});
-
-// Setting the value of attributes via instantiation
-var myTodo = new Todo({
-  title: "Set through instantiation."
-});
-console.log('Todo title: ' + myTodo.get('title')); // Todo title: Set through instantiation.
-console.log('Completed: ' + myTodo.get('completed')); // Completed: false
-
-// Set single attribute value at a time through Model.set():
-myTodo.set("title", "Title attribute set through Model.set().");
-console.log('Todo title: ' + myTodo.get('title')); // Todo title: Title attribute set through Model.set().
-console.log('Completed: ' + myTodo.get('completed')); // Completed: false
-
-// Set map of attributes through Model.set():
-myTodo.set({
-  title: "Both attributes set through Model.set().",
-  completed: true
-});
-console.log('Todo title: ' + myTodo.get('title')); // Todo title: Both attributes set through Model.set().
-console.log('Completed: ' + myTodo.get('completed')); // Completed: true
-
-
-
-
-
-var Todo = Backbone.Model.extend({
-  // Default todo attribute values
-  defaults: {
-    title: '',
-    completed: false
-  },
-  initialize: function(){
-    console.log('This model has been initialized.');
-    this.on('change', function(){
-        console.log('- Values for this model have changed.');
-    });
-  }
-});
-
-var myTodo = new Todo();
-
-myTodo.set('title', 'The listener is triggered whenever an attribute value changes.');
-console.log('Title has changed: ' + myTodo.get('title'));
-
-
-myTodo.set('completed', true);
-console.log('Completed has changed: ' + myTodo.get('completed'));
-
-myTodo.set({
-  title: 'Changing more than one attribute at the same time only triggers the listener once.',
-  completed: true
-});
-
-// Above logs:
-// This model has been initialized.
-// - Values for this model have changed.
-// Title has changed: The listener is triggered whenever an attribute value changes.
-// - Values for this model have changed.
-// Completed has changed: true
-// - Values for this model have changed.
-
-
-var NoteCollectionClass = document.getElementById("notes");
-
- 
-
-// Start from the highest index and work towards zero
-
-for (var i = selectList.length - 1; i >= 0; i--) {
-
-    // Is this option selected? Yes, call remove and give the current index "i"
-
-    if (remove.options[i].selected) {
-
-      selectList.remove(i);
-
+    else{
+      deleteButton.removeAttr('disabled').removeClass('disabled');
     }
+  }
+  //generates a unique id
+  function generateId(){
+     return "reminder-" + +new Date();    
+  }
+  //saves an item to localStorage
+  var saveReminder = function(id, content){
+    localStorage.setItem(id, content);
+  };
+                                       
+  var editReminder = function(id){
+     var $this = $('#' + id);
+     $this.focus()
+          .append($('<button />', {
+                        "class": "icon-save save-button", 
+                         click: function(){
+                                  
+          $this.attr('contenteditable', 'false');
 
-}
+          var newcontent = $this.text(), saved = $('.save-notification');
+
+          if(!newcontent) {
+              var confirmation = confirm('Delete this item?');
+              if(confirmation) {
+              removeReminder(id);
+              }
+          }
+          else{
+          localStorage.setItem(id, newcontent);
+          saved.show();
+          setTimeout(function(){
+             saved.hide();
+          },2000);
+          $(this).remove();
+          $('.icon-pencil').show();
+               }
+                
+            }
+                 
+           }));                
+   };
+  
+   //removes item from localStorage
+   var deleteReminder = function(id, content){
+     localStorage.removeItem(id);
+     count--;
+     updateCounter();
+   };
+ 
+   var UndoOption = function(){
+      var undobutton = $('.undo-button');
+      setTimeout(function(){
+        undobutton.fadeIn(300).on('click', function(){
+          createReminder(lastdeletedID, lastdeletedTEXT, lastdeletedINDEX);
+          $(this).fadeOut(300);
+        });
+        setTimeout(function(){
+          undobutton.fadeOut(1000);
+        }, 3000);  
+      },1000)
+      
+   };
+ 
+   var removeReminder = function(id){
+      var item = $('#' + id );
+      lastdeletedID = id;
+      lastdeletedTEXT = item.text();
+      lastdeletedINDEX = item.index();
+      
+      item.addClass('removed-item')
+          .one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {
+              $(this).remove();
+           });
+
+      deleteReminder(id);
+     //add undo option only if the edited item is not empty
+      if(lastdeletedTEXT){
+        UndoOption();
+      }
+    };
+   
+    var createReminder = function(id, content, index){
+      var reminder = '<li id="' + id + '">' + content + '</li>',
+          list = $('.reminders li');
+          
+      
+      if(!$('#'+ id).length){
+        
+        if(index && index < list.length){
+          var i = index +1;
+          reminder = $(reminder).addClass('restored-item');
+          $('.reminders li:nth-child(' + i + ')').before(reminder);
+        }
+        if(index === 0){
+          reminder = $(reminder).addClass('restored-item');
+          $('.reminders').prepend(reminder);
+        }
+        if(index === list.length){
+          reminder = $(reminder).addClass('restored-item');
+          $('.reminders').append(reminder);
+        }
+        if(index === undefined){
+          reminder = $(reminder).addClass('new-item');
+          $('.reminders').append(reminder); 
+        }
+
+        var createdItem = $('#'+ id);
+
+        createdItem.append($('<button />', {
+                               "class" :"icon-trash delete-button",
+                               "contenteditable" : "false",
+                               click: function(){
+                                        var confirmation = confirm('Delete this item?');
+                                        if(confirmation) {
+                                           removeReminder(id);
+                                         }
+                                      }
+                  })); 
+
+        createdItem.append($('<button />', {
+                              "class" :"icon-pencil edit-button",
+                              "contenteditable" : "false",
+                              click: function(){
+                                      createdItem.attr('contenteditable', 'true');
+                                      editReminder(id);
+                                      $(this).hide();
+                              } 
+                 }));
+        createdItem.on('keydown', function(ev){
+            if(ev.keyCode === 13) return false;
+        });
+        
+        saveReminder(id, content);
+        count++;
+        updateCounter();
+      }
+    };
+//handler for input
+    var handleInput = function(){
+          $('#input-form').on('submit', function(event){
+             var input = $('#text'),
+              value = input.val();
+              event.preventDefault();
+              if (value){ 
+                  var text = value;
+                  var id = generateId();
+                  createReminder(id, text);
+                  input.val(''); 
+              }
+          });
+     };
+  
+     var loadReminders = function(){
+       if(localStorage.length!==0){
+         for(var key in localStorage){
+           var text = localStorage.getItem(key);
+           if(key.indexOf('reminder') === 0){
+             createReminder(key, text);
+           }
+         }
+       }
+     };
+  //handler for the "delete all" button
+     var handleDeleteButton = function(){
+          $('.clear-all').on('click', function(){
+            if(confirm('Are you sure you want to delete all the items in the list? There is no turning back after that.')){                 //remove items from DOM
+              var items = $('li[id ^= reminder]');
+              items.addClass('removed-item').one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {
+                $(this).remove();
+             });
+
+              //look for items in localStorage that start with reminder- and remove them
+              var keys = [];
+              for(var key in localStorage){ 
+                 if(key.indexOf('reminder') === 0){
+
+                   localStorage.removeItem(key);
+                 }
+              }
+              count = 0;
+              updateCounter();
+            }
+          });
+      };
+  
+    var init = function(){
+           $('#text').focus();
+           loadReminders();
+           handleDeleteButton();
+           handleInput();
+           updateCounter();
+    };
+  //start all
+  init();
+
+})();
+
 
 
 
