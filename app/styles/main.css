@@ -375,6 +375,23 @@ input[type='submit']{
   font-weight: bolder;
 }
 
+input[type='submit']:active{
+  height:50px;
+  width:70px;
+  padding:10px;
+  text-align:center;
+  background-color: rgba(0,0,0,.50);
+  border:0;
+  border-left:0;
+  color: purple;
+  cursor:pointer;
+  padding:0;
+  vertical-align:bottom;
+  font:300 18px "Lato", "Arial", sans-serif;
+  font-weight: bolder;
+}
+
+
 button::-moz-focus-inner {
   border: 0;
   padding: 0;
@@ -422,6 +439,13 @@ button,
   background-color: rgba(0,0,0,.50);
   font:300 18px "Lato", "Arial", sans-serif;
   color: orange;
+  font-weight: bolder;
+}
+
+.clear-all:active{
+  background-color: rgba(0,0,0,.50);
+  font:300 18px "Lato", "Arial", sans-serif;
+  color: purple;
   font-weight: bolder;
 }
 
