@@ -23,18 +23,16 @@ if (typeof todoApp === "undefined") todoApp = {};
 })();
 
 
-describe("mini reminders list", function(){
-  describe("Initialization", function() {
-    beforeEach(function() {     
-    })   
-  })
-})
+'use strict';
+(function () {
+    describe('mini reminders list', function () {
+        describe('Keep list of all reminders', function () {
+            it('Should delete reminders when user decides', function () {
 
-if (typeof reminders === "newTodo") reminders = {};
-
-
-
-
+            });
+        });
+    });
+})();
 /* NEED HELP GROKING UNIT TESTING */
 
 
