@@ -43,7 +43,7 @@ li.new-item {
 }
 
 .keyframes .new-item-animation {
-   {
+   
     opacity: 0;
     -webkit-transform: translateY(-400px);
     -ms-transform: translateY(-400px);

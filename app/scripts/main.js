@@ -10,14 +10,17 @@ Parse.initialize("MREHdC9OjtXDq5Y9hllrZ16vk3ccFF6ZLBTRxrSK", "r0ycB4sOzGJbZO3cmQ
     if(count === 0){
       deleteButton.attr('disabled', 'disabled').addClass('disabled');
     }
+
     else{
       deleteButton.removeAttr('disabled').removeClass('disabled');
     }
   }
+
   //generates a unique id
   function generateId(){
      return "reminder-" + +new Date();    
   }
+
   //saves an item to localStorage
   var saveReminder = function(id, content){
     localStorage.setItem(id, content);
@@ -40,6 +43,7 @@ Parse.initialize("MREHdC9OjtXDq5Y9hllrZ16vk3ccFF6ZLBTRxrSK", "r0ycB4sOzGJbZO3cmQ
               removeReminder(id);
               }
           }
+
           else{
           localStorage.setItem(id, newcontent);
           saved.show();
@@ -141,6 +145,7 @@ Parse.initialize("MREHdC9OjtXDq5Y9hllrZ16vk3ccFF6ZLBTRxrSK", "r0ycB4sOzGJbZO3cmQ
                                       $(this).hide();
                               } 
                  }));
+
         createdItem.on('keydown', function(ev){
             if(ev.keyCode === 13) return false;
         });
@@ -150,6 +155,7 @@ Parse.initialize("MREHdC9OjtXDq5Y9hllrZ16vk3ccFF6ZLBTRxrSK", "r0ycB4sOzGJbZO3cmQ
         updateCounter();
       }
     };
+
 //handler for input
     var handleInput = function(){
           $('#input-form').on('submit', function(event){
@@ -179,7 +185,7 @@ Parse.initialize("MREHdC9OjtXDq5Y9hllrZ16vk3ccFF6ZLBTRxrSK", "r0ycB4sOzGJbZO3cmQ
   //handler for the "delete all" button
      var handleDeleteButton = function(){
           $('.clear-all').on('click', function(){
-            if(confirm('Are you sure you want to delete all the items in the list? There is no turning back after that.')){                 //remove items from DOM
+            if(confirm('Are you sure you want to delete all the items in the list? There is no turning back after that.')){     //remove items from DOM
               var items = $('li[id ^= reminder]');
               items.addClass('removed-item').one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {
                 $(this).remove();
