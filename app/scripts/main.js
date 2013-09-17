@@ -175,6 +175,7 @@ Parse.initialize("MREHdC9OjtXDq5Y9hllrZ16vk3ccFF6ZLBTRxrSK", "r0ycB4sOzGJbZO3cmQ
          }
        }
      };
+  
   //handler for the "delete all" button
      var handleDeleteButton = function(){
           $('.clear-all').on('click', function(){
