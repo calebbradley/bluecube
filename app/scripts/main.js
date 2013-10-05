@@ -2,7 +2,7 @@ Parse.initialize("MREHdC9OjtXDq5Y9hllrZ16vk3ccFF6ZLBTRxrSK", "r0ycB4sOzGJbZO3cmQ
 
 $(function(){
 
-  var lastdeletedID, lastdeletedTEXT, lastdeletedINDEX, count = 0;
+ var lastdeletedID, lastdeletedTEXT, lastdeletedINDEX, count = 0;
   
   function updateCounter(){
     $('.count').text(count);
@@ -215,7 +215,7 @@ $(function(){
   //start all
   init();
 
-})();
+});
 
 
 
